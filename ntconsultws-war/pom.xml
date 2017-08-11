@@ -58,6 +58,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Oracle jdbc 14 -->
 		<dependency>
 			<groupId>com.oracle.jdbc</groupId>
 			<artifactId>ojdbc14</artifactId>
