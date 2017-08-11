@@ -17,7 +17,7 @@ import br.com.ntconsultws.in.TokenUsuario;
 import br.com.ntconsultws.out.Item;
 import br.com.ntconsultws.out.ListaItens;
 
-@WebService(serviceName = "EstoqueWS")
+@WebService(serviceName = "EstoqueWS", targetNamespace = "http://service.ntconsultws.com.br")
 public class EstoqueWS {
 
     private ItemDao dao = new ItemDao();

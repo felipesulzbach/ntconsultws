@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>br.com.ntconsultws</groupId>
 		<artifactId>ntconsultws</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.1</version>
 	</parent>
 	<artifactId>ntconsultws-entity</artifactId>
 	<packaging>jar</packaging>

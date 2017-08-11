@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>br.com.ntconsultws</groupId>
 		<artifactId>ntconsultws</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.1</version>
 	</parent>
 	<artifactId>ntconsultws-ejb</artifactId>
 	<packaging>ejb</packaging>
@@ -21,7 +21,7 @@
 			<groupId>br.com.ntconsultws</groupId>
 			<artifactId>ntconsultws-entity</artifactId>
 		</dependency>
-		<!-- ENTITY - JAR -->
+		<!-- BEAN - JAR -->
 		<dependency>
 			<groupId>br.com.ntconsultws</groupId>
 			<artifactId>ntconsultws-bean</artifactId>
@@ -50,6 +50,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
