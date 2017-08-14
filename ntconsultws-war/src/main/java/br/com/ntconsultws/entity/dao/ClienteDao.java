@@ -79,14 +79,10 @@ public class ClienteDao extends BaseDao {
 	}
 
 	public void salvar(EntityManager entityManager, Cliente cliente) throws Exception {
-		entityManager.getTransaction().begin();
 		entityManager.merge(cliente);
-		entityManager.getTransaction().commit();
 	}
 
 	public void remover(EntityManager entityManager, Cliente cliente) throws Exception {
-		entityManager.getTransaction().begin();
 		entityManager.remove(cliente);
-		entityManager.getTransaction().commit();
 	}
 }

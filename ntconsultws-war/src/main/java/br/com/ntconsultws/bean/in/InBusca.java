@@ -16,8 +16,6 @@ public class InBusca implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement(required = false)
-	private Long id;
-	@XmlElement(required = false)
 	private String nome;
 	@XmlElement(required = false)
 	private String numCpfCnpj;
@@ -29,14 +27,6 @@ public class InBusca implements Serializable {
 	private String flgAtivo;
 
 	public InBusca() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {

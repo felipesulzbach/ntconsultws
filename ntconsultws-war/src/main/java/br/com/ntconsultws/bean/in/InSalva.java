@@ -13,69 +13,59 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InSalva implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@XmlElement(required = false)
-	private Long id;
-	@XmlElement(required = true)
-	private String nome;
-	@XmlElement(required = true)
-	private String numCpfCnpj;
-	@XmlElement(required = false)
-	private Date dtNascimento;
-	@XmlElement(required = false)
-	private BigDecimal vlrCompra;
-	@XmlElement(required = false)
-	private String flgAtivo;
+    @XmlElement(required = true)
+    private String nome;
+    @XmlElement(required = true)
+    private String numCpfCnpj;
+    @XmlElement(required = false)
+    private Date dtNascimento;
+    @XmlElement(required = false)
+    private BigDecimal vlrCompra;
+    @XmlElement(required = false)
+    private String flgAtivo;
 
-	public InSalva() {
-	}
+    public InSalva() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNumCpfCnpj() {
+        return numCpfCnpj;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNumCpfCnpj(String numCpfCnpj) {
+        this.numCpfCnpj = numCpfCnpj;
+    }
 
-	public String getNumCpfCnpj() {
-		return numCpfCnpj;
-	}
+    public Date getDtNascimento() {
+        return dtNascimento;
+    }
 
-	public void setNumCpfCnpj(String numCpfCnpj) {
-		this.numCpfCnpj = numCpfCnpj;
-	}
+    public void setDtNascimento(Date dtNascimento) {
+        this.dtNascimento = dtNascimento;
+    }
 
-	public Date getDtNascimento() {
-		return dtNascimento;
-	}
+    public BigDecimal getVlrCompra() {
+        return vlrCompra;
+    }
 
-	public void setDtNascimento(Date dtNascimento) {
-		this.dtNascimento = dtNascimento;
-	}
+    public void setVlrCompra(BigDecimal vlrCompra) {
+        this.vlrCompra = vlrCompra;
+    }
 
-	public BigDecimal getVlrCompra() {
-		return vlrCompra;
-	}
+    public String getFlgAtivo() {
+        return flgAtivo;
+    }
 
-	public void setVlrCompra(BigDecimal vlrCompra) {
-		this.vlrCompra = vlrCompra;
-	}
-
-	public String getFlgAtivo() {
-		return flgAtivo;
-	}
-
-	public void setFlgAtivo(String flgAtivo) {
-		this.flgAtivo = flgAtivo;
-	}
+    public void setFlgAtivo(String flgAtivo) {
+        this.flgAtivo = flgAtivo;
+    }
 }

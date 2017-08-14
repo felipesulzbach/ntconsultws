@@ -47,4 +47,16 @@ public class Mensagem implements Serializable {
         this.compl = compl;
         return this;
     }
+
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setCompl(String compl) {
+        this.compl = compl;
+    }
 }

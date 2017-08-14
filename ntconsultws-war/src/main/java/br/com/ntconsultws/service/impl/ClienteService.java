@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.ntconsultws.bean.ClienteBean;
 import br.com.ntconsultws.bean.Mensagem;
 import br.com.ntconsultws.bean.in.InBusca;
 import br.com.ntconsultws.bean.in.InBuscaValidacao;
@@ -47,7 +46,7 @@ public class ClienteService implements ClienteServiceLocal {
 
             final OutBuscar out = new OutBuscar();
             out.setClienteList(ConverterClienteBean.create()
-                    .converter(ClienteDao.instance().buscar(entityManager, ClienteBean.converterInToEntity(in))));
+                    .converter(ClienteDao.instance().buscar(entityManager, Cliente.converterInToEntity(in))));
             return out;
         } catch (ValidacaoException ex) {
             throw ex;
@@ -64,7 +63,7 @@ public class ClienteService implements ClienteServiceLocal {
         try {
             InSalvaValidacao.create(in).validar();
 
-            ClienteDao.instance().salvar(entityManager, ClienteBean.converterInToEntity(in));
+            ClienteDao.instance().salvar(entityManager, Cliente.converterInToEntity(in));
             throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
                     .withDesc("Cliente's salvo's com Sucesso!"));
         } catch (ValidacaoException ex) {
@@ -83,7 +82,7 @@ public class ClienteService implements ClienteServiceLocal {
             InRemoveValidacao.create(in).validar();
 
             final List<Cliente> clienteList = ClienteDao.instance().buscar(entityManager,
-                    ClienteBean.converterInToEntity(in));
+                    Cliente.converterInToEntity(in));
             if (clienteList != null && !clienteList.isEmpty()) {
                 clienteList.forEach(cliente -> {
                     try {
