@@ -1,4 +1,14 @@
 
+/*
+  bd: postgre
+  port: 5432
+  password: admin
+*/
+
+
+
+-------------------------------------------------------------------------
+
 -- Retorna data em double.
 SELECT date_part('day', TIMESTAMP '2001-02-16 20:38:40');
 
