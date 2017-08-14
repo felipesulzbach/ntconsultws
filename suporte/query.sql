@@ -13,7 +13,7 @@
   user: postgres
   password: admin
 */
---URL Servico: http://localhost:8080/ntconsultws-war/ClienteService/ClienteService?wsdl
+--URL Servico: http://localhost:8080/ntconsultws/ClienteService/ClienteService?wsdl
 
 ------------------------------------------------------------------------
 
