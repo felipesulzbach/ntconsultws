@@ -2,6 +2,7 @@ package br.com.ntconsultws.service.impl;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -29,89 +30,90 @@ import br.com.ntconsultws.service.exception.ValidacaoException;
 import br.com.ntconsultws.util.ValidaEnum;
 
 @WebService(serviceName = "ClienteService", targetNamespace = "http://service.ntconsultws.com.br")
+@Stateless
 public class ClienteService implements ClienteServiceLocal {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ClienteDao.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ClienteDao.class);
 
-	@PersistenceContext(unitName = "Ntconsult-PU")
-	private EntityManager entityManager;
+    @PersistenceContext(unitName = "Ntconsult-PU")
+    private EntityManager entityManager;
 
-	@Override
-	@WebMethod(operationName = "buscar")
-	@WebResult(name = "outBuscar")
-	public OutBuscar buscar(@WebParam(name = "inBusca") InBusca in) throws ValidacaoException {
-		try {
-			InBuscaValidacao.create(in).validar();
+    @Override
+    @WebMethod(operationName = "buscar")
+    @WebResult(name = "outBuscar")
+    public OutBuscar buscar(@WebParam(name = "inBusca") InBusca in) throws ValidacaoException {
+        try {
+            InBuscaValidacao.create(in).validar();
 
-			final OutBuscar out = new OutBuscar();
-			out.setClienteList(ConverterClienteBean.create()
-					.converter(ClienteDao.instance().buscar(entityManager, ClienteBean.converterInToEntity(in))));
-			return out;
-		} catch (ValidacaoException ex) {
-			throw ex;
-		} catch (Exception ex) {
-			final String msg = ajustarMensagemErro("Erro ao buscar.", ex);
-			LOG.error(msg + ex);
-			throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.ERRO_CRITICO.getValue()).withDesc(msg));
-		}
-	}
+            final OutBuscar out = new OutBuscar();
+            out.setClienteList(ConverterClienteBean.create()
+                    .converter(ClienteDao.instance().buscar(entityManager, ClienteBean.converterInToEntity(in))));
+            return out;
+        } catch (ValidacaoException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            final String msg = ajustarMensagemErro("Erro ao buscar.", ex);
+            LOG.error(msg + ex);
+            throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.ERRO_CRITICO.getValue()).withDesc(msg));
+        }
+    }
 
-	@Override
-	@WebMethod(operationName = "salvar")
-	public void salvar(@WebParam(name = "inSalva") InSalva in) throws ValidacaoException {
-		try {
-			InSalvaValidacao.create(in).validar();
+    @Override
+    @WebMethod(operationName = "salvar")
+    public void salvar(@WebParam(name = "inSalva") InSalva in) throws ValidacaoException {
+        try {
+            InSalvaValidacao.create(in).validar();
 
-			ClienteDao.instance().salvar(entityManager, ClienteBean.converterInToEntity(in));
-			throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
-					.withDesc("Cliente's salvo's com Sucesso!"));
-		} catch (ValidacaoException ex) {
-			throw ex;
-		} catch (Exception ex) {
-			final String msg = ajustarMensagemErro("Erro ao salvar.", ex);
-			LOG.error(msg + ex);
-			throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.ERRO_CRITICO.getValue()).withDesc(msg));
-		}
-	}
+            ClienteDao.instance().salvar(entityManager, ClienteBean.converterInToEntity(in));
+            throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
+                    .withDesc("Cliente's salvo's com Sucesso!"));
+        } catch (ValidacaoException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            final String msg = ajustarMensagemErro("Erro ao salvar.", ex);
+            LOG.error(msg + ex);
+            throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.ERRO_CRITICO.getValue()).withDesc(msg));
+        }
+    }
 
-	@Override
-	@WebMethod(operationName = "remover")
-	public void remover(@WebParam(name = "inRemove") InRemove in) throws ValidacaoException {
-		try {
-			InRemoveValidacao.create(in).validar();
+    @Override
+    @WebMethod(operationName = "remover")
+    public void remover(@WebParam(name = "inRemove") InRemove in) throws ValidacaoException {
+        try {
+            InRemoveValidacao.create(in).validar();
 
-			final List<Cliente> clienteList = ClienteDao.instance().buscar(entityManager,
-					ClienteBean.converterInToEntity(in));
-			if (clienteList != null && !clienteList.isEmpty()) {
-				clienteList.forEach(cliente -> {
-					try {
-						ClienteDao.instance().remover(entityManager, cliente);
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				});
-				throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
-						.withDesc("Cliente's removido's com Sucesso!"));
-			} else {
-				throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
-						.withDesc("Nenhum Cliente encontrado para remoção!"));
-			}
-		} catch (ValidacaoException ex) {
-			throw ex;
-		} catch (Exception ex) {
-			final String msg = ajustarMensagemErro("Erro ao remover.", ex);
-			LOG.error(msg + ex);
-			throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.ERRO_CRITICO.getValue()).withDesc(msg));
-		}
-	}
+            final List<Cliente> clienteList = ClienteDao.instance().buscar(entityManager,
+                    ClienteBean.converterInToEntity(in));
+            if (clienteList != null && !clienteList.isEmpty()) {
+                clienteList.forEach(cliente -> {
+                    try {
+                        ClienteDao.instance().remover(entityManager, cliente);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
+                        .withDesc("Cliente's removido's com Sucesso!"));
+            } else {
+                throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
+                        .withDesc("Nenhum Cliente encontrado para remoção!"));
+            }
+        } catch (ValidacaoException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            final String msg = ajustarMensagemErro("Erro ao remover.", ex);
+            LOG.error(msg + ex);
+            throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.ERRO_CRITICO.getValue()).withDesc(msg));
+        }
+    }
 
-	private String ajustarMensagemErro(final String msg, Exception ex) {
-		final StringBuilder strb = new StringBuilder();
-		strb.append(msg);
-		strb.append(" Causa: ");
-		strb.append(ex.getCause());
-		strb.append(" Mensagem: ");
-		strb.append(ex.getMessage());
-		return strb.toString();
-	}
+    private String ajustarMensagemErro(final String msg, Exception ex) {
+        final StringBuilder strb = new StringBuilder();
+        strb.append(msg);
+        strb.append(" Causa: ");
+        strb.append(ex.getCause());
+        strb.append(" Mensagem: ");
+        strb.append(ex.getMessage());
+        return strb.toString();
+    }
 }
