@@ -54,12 +54,21 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
+	public static synchronized Cliente create() {
+		return new Cliente();
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Cliente withId(final Long id) {
+		this.id = id;
+		return this;
 	}
 
 	public String getNome() {
@@ -70,12 +79,22 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 	}
 
+	public Cliente withNome(final String nome) {
+		this.nome = nome;
+		return this;
+	}
+
 	public String getNumCpfCnpj() {
 		return numCpfCnpj;
 	}
 
 	public void setNumCpfCnpj(String numCpfCnpj) {
 		this.numCpfCnpj = numCpfCnpj;
+	}
+
+	public Cliente withNumCpfCnpj(final String numCpfCnpj) {
+		this.numCpfCnpj = numCpfCnpj;
+		return this;
 	}
 
 	public Date getDtNascimento() {
@@ -86,6 +105,11 @@ public class Cliente implements Serializable {
 		this.dtNascimento = dtNascimento;
 	}
 
+	public Cliente withDtNascimento(final Date dtNascimento) {
+		this.dtNascimento = dtNascimento;
+		return this;
+	}
+
 	public BigDecimal getVlrCompra() {
 		return vlrCompra;
 	}
@@ -94,12 +118,22 @@ public class Cliente implements Serializable {
 		this.vlrCompra = vlrCompra;
 	}
 
+	public Cliente withVlrCompra(final BigDecimal vlrCompra) {
+		this.vlrCompra = vlrCompra;
+		return this;
+	}
+
 	public String getFlgAtivo() {
 		return flgAtivo;
 	}
 
 	public void setFlgAtivo(String flgAtivo) {
 		this.flgAtivo = flgAtivo;
+	}
+
+	public Cliente withFlgAtivo(final String flgAtivo) {
+		this.flgAtivo = flgAtivo;
+		return this;
 	}
 
 	@Override

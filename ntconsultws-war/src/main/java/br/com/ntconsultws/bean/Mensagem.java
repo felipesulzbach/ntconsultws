@@ -14,7 +14,7 @@ public class Mensagem implements Serializable {
     private String desc;
     private String compl;
 
-    private Mensagem() {
+    public Mensagem() {
     }
 
     public static synchronized Mensagem create() {

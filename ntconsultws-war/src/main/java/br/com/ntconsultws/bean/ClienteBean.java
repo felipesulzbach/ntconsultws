@@ -4,75 +4,98 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import br.com.ntconsultws.bean.in.InBusca;
+import br.com.ntconsultws.bean.in.InRemove;
+import br.com.ntconsultws.bean.in.InSalva;
+import br.com.ntconsultws.entity.Cliente;
+
 public class ClienteBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private Long id;
-    private String nome;
-    private String numCpfCnpj;
-    private Date dtNascimento;
-    private BigDecimal vlrCompra;
-    private boolean flgAtivo;
+	private Long id;
+	private String nome;
+	private String numCpfCnpj;
+	private Date dtNascimento;
+	private BigDecimal vlrCompra;
+	private boolean flgAtivo;
 
-    private ClienteBean() {
-    }
+	public ClienteBean() {
+	}
 
-    public static synchronized ClienteBean create() {
-        return new ClienteBean();
-    }
+	public static synchronized ClienteBean create() {
+		return new ClienteBean();
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public static Cliente converterInToEntity(final InBusca in) {
+		return Cliente.create().withId(in.getId()).withNome(in.getNome()).withNumCpfCnpj(in.getNumCpfCnpj())
+				.withDtNascimento(in.getDtNascimento()).withVlrCompra(in.getVlrCompra())
+				.withFlgAtivo(in.getFlgAtivo());
+	}
 
-    public ClienteBean withId(final Long id) {
-        this.id = id;
-        return this;
-    }
+	public static Cliente converterInToEntity(final InRemove in) {
+		return Cliente.create().withId(in.getId()).withNome(in.getNome()).withNumCpfCnpj(in.getNumCpfCnpj())
+				.withDtNascimento(in.getDtNascimento()).withVlrCompra(in.getVlrCompra())
+				.withFlgAtivo(in.getFlgAtivo());
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public static Cliente converterInToEntity(final InSalva in) {
+		return Cliente.create().withId(in.getId()).withNome(in.getNome()).withNumCpfCnpj(in.getNumCpfCnpj())
+				.withDtNascimento(in.getDtNascimento()).withVlrCompra(in.getVlrCompra())
+				.withFlgAtivo(in.getFlgAtivo());
+	}
 
-    public ClienteBean withNome(final String nome) {
-        this.nome = nome;
-        return this;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getNumCpfCnpj() {
-        return numCpfCnpj;
-    }
+	public ClienteBean withId(final Long id) {
+		this.id = id;
+		return this;
+	}
 
-    public ClienteBean withNumCpfCnpj(final String numCpfCnpj) {
-        this.numCpfCnpj = numCpfCnpj;
-        return this;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
+	public ClienteBean withNome(final String nome) {
+		this.nome = nome;
+		return this;
+	}
 
-    public ClienteBean withDtNascimento(final Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
-        return this;
-    }
+	public String getNumCpfCnpj() {
+		return numCpfCnpj;
+	}
 
-    public BigDecimal getVlrCompra() {
-        return vlrCompra;
-    }
+	public ClienteBean withNumCpfCnpj(final String numCpfCnpj) {
+		this.numCpfCnpj = numCpfCnpj;
+		return this;
+	}
 
-    public ClienteBean withVlrCompra(final BigDecimal vlrCompra) {
-        this.vlrCompra = vlrCompra;
-        return this;
-    }
+	public Date getDtNascimento() {
+		return dtNascimento;
+	}
 
-    public boolean isFlgAtivo() {
-        return flgAtivo;
-    }
+	public ClienteBean withDtNascimento(final Date dtNascimento) {
+		this.dtNascimento = dtNascimento;
+		return this;
+	}
 
-    public ClienteBean withFlgAtivo(final boolean flgAtivo) {
-        this.flgAtivo = flgAtivo;
-        return this;
-    }
+	public BigDecimal getVlrCompra() {
+		return vlrCompra;
+	}
+
+	public ClienteBean withVlrCompra(final BigDecimal vlrCompra) {
+		this.vlrCompra = vlrCompra;
+		return this;
+	}
+
+	public boolean isFlgAtivo() {
+		return flgAtivo;
+	}
+
+	public ClienteBean withFlgAtivo(final boolean flgAtivo) {
+		this.flgAtivo = flgAtivo;
+		return this;
+	}
 }

@@ -1,5 +1,6 @@
 package br.com.ntconsultws.entity.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.ntconsultws.entity.Cliente;
+import br.com.ntconsultws.util.ObjectUtil;
 
 /**
  * 
@@ -32,33 +34,48 @@ public class ClienteDao extends BaseDao {
 		sql.append(" SELECT c.* ");
 		sql.append("   FROM cliente c ");
 		sql.append("  WHERE 1 = 1     ");
-		if (cliente.getId() == null) {
+		if (cliente.getId() != null) {
 			sql.append(" AND c.id = :id ");
 			parametros.put("id", cliente.getId());
 		}
-		if (cliente.getNome() == null) {
+		if (cliente.getNome() != null && !cliente.getNome().isEmpty()) {
 			sql.append(" AND c.nome = :nome ");
 			parametros.put("nome", cliente.getNome());
 		}
-		if (cliente.getNumCpfCnpj() == null) {
+		if (cliente.getNumCpfCnpj() != null && !cliente.getNumCpfCnpj().isEmpty()) {
 			sql.append(" AND c.num_cpf_cnpj = :numCpfCnpj ");
 			parametros.put("numCpfCnpj", cliente.getNumCpfCnpj());
 		}
-		if (cliente.getDtNascimento() == null) {
+		if (cliente.getDtNascimento() != null) {
 			sql.append(" AND c.dt_nascimento = :dtNascimento ");
 			parametros.put("dtNascimento", cliente.getDtNascimento());
 		}
-		if (cliente.getVlrCompra() == null) {
+		if (cliente.getVlrCompra() != null) {
 			sql.append(" AND c.vlr_compra = :vlrCompra ");
 			parametros.put("vlrCompra", cliente.getVlrCompra());
 		}
-		if (cliente.getFlgAtivo() == null) {
+		if (cliente.getFlgAtivo() != null && !cliente.getFlgAtivo().isEmpty()) {
 			sql.append(" AND c.flgAtivo = :flgAtivo ");
 			parametros.put("flgAtivo", cliente.getFlgAtivo());
 		}
 
 		final Query query = preencheParametros(em.createNativeQuery(sql.toString()), parametros);
-		return query.getResultList();
+		final List<Object[]> retorno = (List<Object[]>) query.getResultList();
+
+		final List<Cliente> entidadeLista = new ArrayList<Cliente>();
+		for (Object[] obj : retorno) {
+			int index = 0;
+			Cliente entity = new Cliente();
+			entity.setId(ObjectUtil.objLongNull(obj[index], null));
+			entity.setNome(ObjectUtil.objStringNull(obj[++index], ""));
+			entity.setNumCpfCnpj(ObjectUtil.objStringNull(obj[++index], ""));
+			entity.setDtNascimento(ObjectUtil.objTimestampNull(obj[++index], null));
+			entity.setVlrCompra(ObjectUtil.objBigDecimalNull(obj[++index], null));
+			entity.setFlgAtivo(ObjectUtil.objStringNull(obj[++index], ""));
+			entidadeLista.add(entity);
+		}
+
+		return entidadeLista;
 	}
 
 	public void salvar(EntityManager entityManager, Cliente cliente) throws Exception {
