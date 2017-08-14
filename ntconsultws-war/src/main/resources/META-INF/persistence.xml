@@ -6,15 +6,16 @@
 	<persistence-unit name="Ntconsult-PU"
 		transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>jdbc/ntconsultws</jta-data-source>
+		<jta-data-source>java:/ntconsultDS</jta-data-source>
 		<class>br.com.ntconsultws.entity.Cliente</class>
+
 		<properties>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:oracle:thin:@localhost:1521:ntconsultwsdb" />
-			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
-			<property name="javax.persistence.jdbc.user" value="admin" />
+				value="jdbc:postgresql://localhost:5432/ntconsultwsdb" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="admin" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
 		</properties>
