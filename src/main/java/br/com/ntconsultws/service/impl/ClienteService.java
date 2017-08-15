@@ -63,9 +63,7 @@ public class ClienteService implements ClienteServiceLocal {
         try {
             InSalvaValidacao.create(in).validar();
 
-            final Cliente cliente = ClienteDao.instance().salvar(this.entityManager, Cliente.converterInToEntity(in));
-            throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
-                    .withDesc("Cliente salvo com Sucesso! " + (cliente != null ? cliente.toString() : "")));
+            ClienteDao.instance().salvar(this.entityManager, Cliente.converterInToEntity(in));
         } catch (ValidacaoException ex) {
             throw ex;
         } catch (Exception ex) {
