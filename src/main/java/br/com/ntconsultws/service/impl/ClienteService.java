@@ -82,16 +82,9 @@ public class ClienteService implements ClienteServiceLocal {
             final List<Cliente> clienteList = ClienteDao.instance().buscar(this.entityManager,
                     Cliente.converterInToEntity(in));
             if (clienteList != null && !clienteList.isEmpty()) {
-                clienteList.forEach(cliente -> {
-                    try {
-                        ClienteDao.instance().remover(this.entityManager, cliente);
-                    } catch (Exception ex) {
-                        final String msg = ajustarMensagemErro("Erro ao remover.", ex);
-                        LOG.error(msg + ex);
-                    }
-                });
-                throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
-                        .withDesc("Cliente's removido's com Sucesso!"));
+                for (Cliente cliente : clienteList) {
+                    ClienteDao.instance().remover(this.entityManager, cliente);
+                }
             } else {
                 throw new ValidacaoException(Mensagem.create().withCod(ValidaEnum.SUCESSO.getValue())
                         .withDesc("Nenhum Cliente encontrado para remoção!"));

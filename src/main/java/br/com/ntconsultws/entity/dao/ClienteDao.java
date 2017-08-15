@@ -63,7 +63,7 @@ public class ClienteDao extends BaseDao {
         final List<Object[]> retorno = (List<Object[]>) query.getResultList();
 
         final List<Cliente> entidadeLista = new ArrayList<Cliente>();
-        for (Object[] obj : retorno) {
+        retorno.forEach(obj -> {
             int index = 0;
             Cliente entity = new Cliente();
             entity.setId(ObjectUtil.objLongNull(obj[index], null));
@@ -73,7 +73,7 @@ public class ClienteDao extends BaseDao {
             entity.setVlrCompra(ObjectUtil.objBigDecimalNull(obj[++index], null));
             entity.setFlgAtivo(ObjectUtil.objStringNull(obj[++index], ""));
             entidadeLista.add(entity);
-        }
+        });
 
         return entidadeLista;
     }
@@ -85,7 +85,7 @@ public class ClienteDao extends BaseDao {
     }
 
     public void remover(EntityManager entityManager, Cliente cliente) throws Exception {
-        entityManager.remove(cliente);
+        entityManager.remove(entityManager.getReference(Cliente.class, cliente.getId()));
         entityManager.flush();
     }
 }
