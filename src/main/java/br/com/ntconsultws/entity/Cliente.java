@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import br.com.ntconsultws.bean.in.InBusca;
 import br.com.ntconsultws.bean.in.InRemove;
 import br.com.ntconsultws.bean.in.InSalva;
@@ -29,7 +31,8 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GenericGenerator(name = "idincrement", strategy = "increment")
+    @GeneratedValue(generator = "idincrement")
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
