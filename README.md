@@ -8,21 +8,22 @@ ___
 * JDK 8
 * Wildfly 10.x ou superior
 * PostgreSQL 9.6.x ou superior
+
 **OBS:** Será necessário incluir o [Driver JDBC do PostgreSQL](http://central.maven.org/maven2/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar) no Wildfly para conseguir configurar o Datasource.
 
 
 ### Informações para criação do Banco de Dados PostgreSQL
 
-bd: ntconsultwsdb
-port: 5432
-user: postgres
-password: admin
+* **bd:** ntconsultwsdb
+* **port:** 5432
+* **user:** postgres
+* **password:** admin
 
-**OBS:** Para utilizar outro Banco de Dados é necessário ajustar as configurações no arquivo **persistence.xml** que se encontra no projeto.
+**OBS:** Para utilizar outro Banco de Dados será necessário ajustar as configurações no arquivo **persistence.xml** que se encontra no projeto.
 
 ### Criacao da tabela e registros iniciais para testes
 
-'''sql
+```sql
 CREATE TABLE CLIENTE (
     ID            INTEGER PRIMARY KEY NOT NULL,
     DES_NOME      VARCHAR(40) NOT NULL,
@@ -45,7 +46,7 @@ VALUES (5, 'Cliente Cinco', '33333333333', TIMESTAMP '2016-05-25 21:35:50', 120.
 INSERT INTO CLIENTE (ID, DES_NOME, NUM_CPF_CNPJ, DT_NASCIMENTO, VLR_COMPRA, FLG_ATIVO)
 VALUES (6, 'Cliente Seis', '66666666666666', TIMESTAMP '2017-06-30 23:40:58', 200.87, '1');
 COMMIT;
-'''
+```
 
 ___
 
@@ -55,8 +56,8 @@ ___
 
 **OBS:** Lembrando que **localhost** é o domínio ao qual esse serviço pertence e **8080** é a porta de acesso. O domínio e porta devem ser ajustados conforme ambiente instalado.
 
-### Exemplo de Request **buscar**
-'''html
+### Exemplo de Request BUSCAR
+```html
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ntconsultws.com.br">
    <soapenv:Header/>
    <soapenv:Body>
@@ -75,10 +76,10 @@ ___
       </ser:buscar>
    </soapenv:Body>
 </soapenv:Envelope>
-'''
+```
 
-### Exemplo de Request **salvar**
-'''html
+### Exemplo de Request SALVAR
+```html
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ntconsultws.com.br">
    <soapenv:Header/>
    <soapenv:Body>
@@ -97,10 +98,10 @@ ___
       </ser:salvar>
    </soapenv:Body>
 </soapenv:Envelope>
-'''
+```
 
-### Exemplo de Request **remover**
-'''html
+### Exemplo de Request REMOVER
+```html
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ntconsultws.com.br">
    <soapenv:Header/>
    <soapenv:Body>
@@ -121,4 +122,4 @@ ___
       </ser:remover>
    </soapenv:Body>
 </soapenv:Envelope>
-'''
+```
