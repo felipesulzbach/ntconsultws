@@ -29,8 +29,8 @@ CREATE TABLE CLIENTE (
     DES_NOME      VARCHAR(40) NOT NULL,
     NUM_CPF_CNPJ  VARCHAR(16) NOT NULL,
     DT_NASCIMENTO TIMESTAMP,
-	VLR_COMPRA    REAL,
-	FLG_ATIVO     VARCHAR(1) DEFAULT '0'
+    VLR_COMPRA    REAL,
+    FLG_ATIVO     VARCHAR(1) DEFAULT '0'
 );
 
 INSERT INTO CLIENTE (ID, DES_NOME, NUM_CPF_CNPJ, DT_NASCIMENTO, VLR_COMPRA, FLG_ATIVO)
@@ -54,8 +54,7 @@ COMMIT;
 * **Name:** ntconsultDS
 * **JNDI:** java:/ntconsultDS
 
-**OBS:** Será necessário incluir o [Driver JDBC do PostgreSQL](http://central.maven.org/maven2/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar) no **Wildfly** e para criar o **datasource** utilizando o mesmo. Seguir o [exemplo](https://horochovec.com.br/configurando-um-datasource-do-postgresql-no-wildfly-973558fc155).
-___
+**OBS:** Será necessário incluir o [Driver JDBC do PostgreSQL](http://central.maven.org/maven2/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar) no **Wildfly**, para criar o **datasource** utilizando o mesmo. Seguir o [exemplo](https://horochovec.com.br/configurando-um-datasource-do-postgresql-no-wildfly-973558fc155).
 
 ## Informações para testes do serviço
 
