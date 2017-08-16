@@ -15,8 +15,6 @@ public class InSalva implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(required = false)
-    private Long id;
     @XmlElement(required = true)
     private String nome;
     @XmlElement(required = true)
@@ -29,14 +27,6 @@ public class InSalva implements Serializable {
     private String flgAtivo;
 
     public InSalva() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {

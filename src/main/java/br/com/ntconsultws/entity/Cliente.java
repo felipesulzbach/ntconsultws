@@ -18,6 +18,8 @@ import org.hibernate.annotations.GenericGenerator;
 import br.com.ntconsultws.bean.in.InBusca;
 import br.com.ntconsultws.bean.in.InRemove;
 import br.com.ntconsultws.bean.in.InSalva;
+import br.com.ntconsultws.util.TimeUtil;
+import br.com.ntconsultws.util.TimeUtil.DateEnum;
 
 /**
  * 
@@ -63,12 +65,12 @@ public class Cliente implements Serializable {
 
     public static Cliente converterInToEntity(final InBusca in) {
         return Cliente.create().withNome(in.getNome()).withNumCpfCnpj(in.getNumCpfCnpj())
-                .withDtNascimento(in.getDtNascimento()).withVlrCompra(in.getVlrCompra()).withFlgAtivo(in.getFlgAtivo());
+                .withDtNascimento(in.getDtNascimento()).withFlgAtivo(in.getFlgAtivo());
     }
 
     public static Cliente converterInToEntity(final InRemove in) {
         return Cliente.create().withId(in.getId()).withNome(in.getNome()).withNumCpfCnpj(in.getNumCpfCnpj())
-                .withDtNascimento(in.getDtNascimento()).withVlrCompra(in.getVlrCompra()).withFlgAtivo(in.getFlgAtivo());
+                .withDtNascimento(in.getDtNascimento()).withFlgAtivo(in.getFlgAtivo());
     }
 
     public static Cliente converterInToEntity(final InSalva in) {
@@ -206,7 +208,11 @@ public class Cliente implements Serializable {
         strb.append(", numCpfCnpj=");
         strb.append(numCpfCnpj);
         strb.append(", dtNascimento=");
-        strb.append(dtNascimento);
+        try {
+            strb.append(TimeUtil.dateToDateFormat(dtNascimento, DateEnum.DATE_HOURMINSEC_EUA));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         strb.append(", vlrCompra=");
         strb.append(vlrCompra);
         strb.append(", flgAtivo=");

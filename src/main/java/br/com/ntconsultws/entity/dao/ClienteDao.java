@@ -39,7 +39,7 @@ public class ClienteDao extends BaseDao {
             parametros.put("id", cliente.getId());
         }
         if (cliente.getNome() != null && !cliente.getNome().isEmpty()) {
-            sql.append(" AND c.nome = :nome ");
+            sql.append(" AND c.des_nome = :nome ");
             parametros.put("nome", cliente.getNome());
         }
         if (cliente.getNumCpfCnpj() != null && !cliente.getNumCpfCnpj().isEmpty()) {
@@ -55,7 +55,7 @@ public class ClienteDao extends BaseDao {
             parametros.put("vlrCompra", cliente.getVlrCompra());
         }
         if (cliente.getFlgAtivo() != null && !cliente.getFlgAtivo().isEmpty()) {
-            sql.append(" AND c.flgAtivo = :flgAtivo ");
+            sql.append(" AND c.flg_ativo = :flgAtivo ");
             parametros.put("flgAtivo", cliente.getFlgAtivo());
         }
 

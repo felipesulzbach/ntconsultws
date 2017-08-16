@@ -34,7 +34,8 @@ public class InSalvaValidacao extends ValidadorAbstrato {
             adicionarMessage(ValidaEnum.ERRO.getValue(), "O parametro 'NumCpfCnpj' deve conter apenas números.");
             return false;
         }
-        if (this.in.getFlgAtivo() != null && in.getFlgAtivo().length() > 1) {
+        if (this.in.getFlgAtivo() != null && !this.in.getFlgAtivo().isEmpty()
+                && (in.getFlgAtivo().length() > 1 || TextUtil.containLetter(in.getFlgAtivo()))) {
             adicionarMessage(ValidaEnum.ERRO.getValue(), "O parametro 'FlAtivo' deve conter 0 = FALSE ou 1 = TRUE.");
             return false;
         }
