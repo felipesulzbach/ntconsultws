@@ -5,19 +5,19 @@ Crud de serviços com persistência em banco de dados.
 ___
 
 ## Pré-requisitos
+
+* Eclipse Oxygen ou superior
 * JDK 8
 * Wildfly 10.x ou superior
 * PostgreSQL 9.6.x ou superior
-
-**OBS:** Será necessário incluir o [Driver JDBC do PostgreSQL](http://central.maven.org/maven2/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar) no Wildfly para conseguir configurar o Datasource.
-
+* SoapUI 5.3.0 ou superior
 
 ### Informações para criação do Banco de Dados PostgreSQL
 
-* **bd:** ntconsultwsdb
-* **port:** 5432
-* **user:** postgres
-* **password:** admin
+* **Name:** ntconsultwsdb
+* **Port:** 5432
+* **User:** postgres
+* **Password:** admin
 
 **OBS:** Para utilizar outro Banco de Dados será necessário ajustar as configurações no arquivo **persistence.xml** que se encontra no projeto.
 
@@ -48,6 +48,13 @@ VALUES (6, 'Cliente Seis', '66666666666666', TIMESTAMP '2017-06-30 23:40:58', 20
 COMMIT;
 ```
 
+### Criação de datasourse no Wildfly
+
+* **Type:** Non-XA
+* **Name:** ntconsultDS
+* **JNDI:** java:/ntconsultDS
+
+**OBS:** Será necessário incluir o [Driver JDBC do PostgreSQL](http://central.maven.org/maven2/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar) no **Wildfly** e para criar o **datasource** utilizando o mesmo. Seguir o [exemplo](https://horochovec.com.br/configurando-um-datasource-do-postgresql-no-wildfly-973558fc155).
 ___
 
 ## Informações para testes do serviço
@@ -56,7 +63,7 @@ ___
 
 **OBS:** Lembrando que **localhost** é o domínio ao qual esse serviço pertence e **8080** é a porta de acesso. O domínio e porta devem ser ajustados conforme ambiente instalado.
 
-### Exemplo de Request BUSCAR
+### Exemplo de Request SoapUI BUSCAR
 ```html
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ntconsultws.com.br">
    <soapenv:Header/>
@@ -78,7 +85,7 @@ ___
 </soapenv:Envelope>
 ```
 
-### Exemplo de Request SALVAR
+### Exemplo de Request SoapUI SALVAR
 ```html
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ntconsultws.com.br">
    <soapenv:Header/>
@@ -100,7 +107,7 @@ ___
 </soapenv:Envelope>
 ```
 
-### Exemplo de Request REMOVER
+### Exemplo de Request SoapUI REMOVER
 ```html
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ntconsultws.com.br">
    <soapenv:Header/>
@@ -123,3 +130,5 @@ ___
    </soapenv:Body>
 </soapenv:Envelope>
 ```
+
+**IMPORTANTE:** Para as operações que utilizam os filtros **id** e **dtNascimento**: caso não queira uliliza-los nos testes das operações dos serviços, é necessário remove-los do **request** para não retonar erro (limitações da ferramenta).
